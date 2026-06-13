@@ -74,3 +74,790 @@ class="antialiased theme-transition"
     'bg-slate-50 text-slate-800 font-sans': activeDesign === 2,
     'bg-[#121214] text-gray-100 font-sans': activeDesign === 3
 }">
+
+    <!-- ========================================== -->
+    <!-- INTERACTIVE DESIGN SELECTOR PANEL (STIOKY) -->
+    <!-- ========================================== -->
+    <div class="sticky top-0 z-50 bg-white/95 text-slate-900 border-b border-slate-200 shadow-md px-4 py-3 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="flex h-3 w-3 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+                <div>
+                    <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                        <span>Ammara Bau Web-Konfigurator</span>
+                    </h3>
+                    <p class="text-xs text-slate-500">Klicken Sie durch die 3 maßgeschneiderten Design-Varianten basierend auf Ihrem Logo</p>
+                </div>
+            </div>
+            
+            <!-- Controls -->
+            <div class="flex flex-wrap gap-2 justify-center">
+                <button 
+                    @click="activeDesign = 1" 
+                    class="px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-200 flex items-center gap-2"
+                    :class="activeDesign === 1 ? 'bg-indigo-600 text-white shadow-md scale-105' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'">
+                    <i class="fa-solid fa-palette text-amber-400"></i>
+                    Design 1: Premium Modernist
+                </button>
+                <button 
+                    @click="activeDesign = 2" 
+                    class="px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-200 flex items-center gap-2"
+                    :class="activeDesign === 2 ? 'bg-indigo-600 text-white shadow-md scale-105' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'">
+                    <i class="fa-solid fa-leaf text-emerald-500"></i>
+                    Design 2: Clean Minimalist
+                </button>
+                <button 
+                    @click="activeDesign = 3" 
+                    class="px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-200 flex items-center gap-2"
+                    :class="activeDesign === 3 ? 'bg-indigo-600 text-white shadow-md scale-105' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'">
+                    <i class="fa-solid fa-screwdriver-wrench text-amber-500"></i>
+                    Design 3: Bold Craftsman
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- HEADER SECTION                             -->
+    <!-- ========================================== -->
+    <header class="theme-transition py-6 px-6 lg:px-16 border-b"
+            :class="{
+                'border-white/10 bg-black/15': activeDesign === 1,
+                'border-slate-200 bg-white shadow-sm': activeDesign === 2,
+                'border-neutral-800 bg-neutral-950': activeDesign === 3
+            }">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <!-- Brand Logo Frame -->
+            <div class="flex items-center gap-4">
+                <div class="p-1.5 rounded transition-colors duration-300"
+                     :class="{
+                         'bg-white/10 border border-white/20': activeDesign === 1,
+                         'bg-slate-100 border border-slate-200': activeDesign === 2,
+                         'bg-neutral-900 border border-neutral-800': activeDesign === 3
+                     }">
+                    <!-- Embedded image_c2d8c4.png referenced -->
+                    <img src="image_c2d8c4.png" alt="Ammara Bau Logo" class="h-16 w-auto object-contain rounded">
+                </div>
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-wider uppercase"
+                        :class="{
+                            'font-serif text-white': activeDesign === 1,
+                            'font-sans font-bold text-slate-900': activeDesign === 2,
+                            'font-mono text-white tracking-widest': activeDesign === 3
+                        }">
+                        AMMARA BAU
+                    </h1>
+                    <p class="text-xs uppercase tracking-widest"
+                       :class="{
+                           'text-ammara-gold': activeDesign === 1,
+                           'text-slate-500': activeDesign === 2,
+                           'text-ammara-copper': activeDesign === 3
+                       }">
+                        Renovierung & Bodenlegung
+                    </p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex items-center gap-6 text-sm font-medium">
+                <a href="#services" class="hover:opacity-80 transition">Leistungen</a>
+                <a href="#calculator" class="hover:opacity-80 transition">Kalkulator</a>
+                <a href="#about" class="hover:opacity-80 transition">Über Uns</a>
+                <a href="#contact" class="px-4 py-2 rounded text-xs uppercase tracking-widest font-semibold transition-all duration-300"
+                   :class="{
+                       'bg-ammara-gold hover:bg-white text-slate-900': activeDesign === 1,
+                       'bg-slate-900 hover:bg-slate-700 text-white': activeDesign === 2,
+                       'bg-transparent border border-ammara-copper text-ammara-copper hover:bg-ammara-copper hover:text-white': activeDesign === 3
+                   }">
+                    Kontakt
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- HERO SECTION                               -->
+    <!-- ========================================== -->
+    <section class="relative overflow-hidden py-16 lg:py-28 px-6 lg:px-16 border-b"
+             :class="{
+                 'border-white/10 bg-gradient-to-br from-[#5a5766] to-[#3a3842]': activeDesign === 1,
+                 'border-slate-200 bg-gradient-to-br from-white to-slate-100': activeDesign === 2,
+                 'border-neutral-800 bg-gradient-to-br from-neutral-950 via-[#1e1e24] to-neutral-950': activeDesign === 3
+             }">
+        <!-- Architectural geometric background elements mimicking the logo lines -->
+        <div class="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-end pr-20">
+            <svg class="w-1/3 h-auto" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                <rect x="10" y="10" width="80" height="80" stroke-width="2"/>
+                <line x1="30" y1="90" x2="30" y2="40" stroke-width="2"/>
+                <line x1="40" y1="90" x2="40" y2="30" stroke-width="2"/>
+                <line x1="50" y1="90" x2="50" y2="15" stroke-width="2"/>
+                <line x1="60" y1="90" x2="60" y2="35" stroke-width="2"/>
+                <line x1="70" y1="90" x2="70" y2="45" stroke-width="2"/>
+                <polygon points="30,40 40,30 50,15 60,35 70,45" stroke-width="2" />
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"
+                     :class="{
+                         'bg-white/10 text-ammara-gold border border-white/10': activeDesign === 1,
+                         'bg-slate-200 text-slate-800': activeDesign === 2,
+                         'bg-neutral-800 text-ammara-copper border border-neutral-700': activeDesign === 3
+                     }">
+                    <i class="fa-solid fa-award"></i> Handwerkskunst auf höchstem Niveau
+                </div>
+                
+                <h2 class="text-4xl lg:text-6xl font-extrabold leading-tight tracking-tight"
+                    :class="{
+                        'font-serif text-white': activeDesign === 1,
+                        'font-sans text-slate-900 font-extrabold': activeDesign === 2,
+                        'font-mono text-white tracking-wide': activeDesign === 3
+                    }">
+                    Räume neu definiert. <br>
+                    <span :class="{
+                        'text-ammara-gold': activeDesign === 1,
+                        'text-slate-600': activeDesign === 2,
+                        'text-ammara-copper': activeDesign === 3
+                    }">Meisterhaft verlegt.</span>
+                </h2>
+
+                <p class="text-lg leading-relaxed max-w-xl"
+                   :class="{
+                       'text-white/80': activeDesign === 1,
+                       'text-slate-600': activeDesign === 2,
+                       'text-neutral-400': activeDesign === 3
+                   }">
+                    Ammara Bau steht für kompromisslose Qualität bei Renovierungsarbeiten und anspruchsvoller Bodenlegung. Wir bringen Struktur, Langlebigkeit und erstklassige Materialien in Ihr Zuhause oder Büro.
+                </p>
+
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="#calculator" 
+                       class="px-8 py-4 rounded-lg font-bold text-sm tracking-wider uppercase transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                       :class="{
+                           'bg-ammara-gold text-slate-950 hover:bg-white': activeDesign === 1,
+                           'bg-slate-900 text-white hover:bg-slate-800': activeDesign === 2,
+                           'bg-ammara-copper text-white hover:bg-amber-600': activeDesign === 3
+                       }">
+                        Angebotsrechner starten
+                    </a>
+                    <a href="#services" 
+                       class="px-8 py-4 rounded-lg font-bold text-sm tracking-wider uppercase transition-all duration-300 border"
+                       :class="{
+                           'border-white/20 text-white hover:bg-white/5': activeDesign === 1,
+                           'border-slate-300 text-slate-700 hover:bg-slate-100': activeDesign === 2,
+                           'border-neutral-700 text-gray-300 hover:bg-neutral-900': activeDesign === 3
+                       }">
+                        Unsere Leistungen
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dynamic visual showcase card mirroring the design aesthetic -->
+            <div class="lg:col-span-5">
+                <div class="p-8 rounded-2xl relative shadow-2xl overflow-hidden theme-transition border"
+                     :class="{
+                         'bg-[#413e4b] border-white/10': activeDesign === 1,
+                         'bg-white border-slate-200': activeDesign === 2,
+                         'bg-neutral-900 border-neutral-800': activeDesign === 3
+                     }">
+                    
+                    <!-- Logo watermarked back of the showcase card -->
+                    <div class="absolute -right-12 -bottom-12 opacity-5 pointer-events-none">
+                        <img src="image_c2d8c4.png" alt="Branding" class="w-64 h-auto">
+                    </div>
+
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest font-semibold"
+                                  :class="{
+                                      'text-ammara-gold': activeDesign === 1,
+                                      'text-slate-400': activeDesign === 2,
+                                      'text-ammara-copper': activeDesign === 3
+                                  }">
+                                Ihr Renovierungsprojekt
+                            </span>
+                            <h4 class="text-xl font-bold mt-1"
+                                :class="{
+                                    'font-serif text-white': activeDesign === 1,
+                                    'text-slate-900': activeDesign === 2,
+                                    'text-white font-mono': activeDesign === 3
+                                }">
+                                Premium Standard
+                            </h4>
+                        </div>
+                        <i class="fa-solid fa-square-poll-vertical text-3xl"
+                           :class="{
+                               'text-ammara-gold': activeDesign === 1,
+                               'text-slate-400': activeDesign === 2,
+                               'text-ammara-copper': activeDesign === 3
+                           }"></i>
+                    </div>
+
+                    <!-- Highlight Bullet Points -->
+                    <div class="space-y-4 relative z-10">
+                        <div class="flex items-center gap-3">
+                            <span class="p-1.5 rounded-md flex items-center justify-center text-xs"
+                                  :class="{
+                                      'bg-white/10 text-ammara-gold': activeDesign === 1,
+                                      'bg-slate-100 text-slate-800': activeDesign === 2,
+                                      'bg-neutral-800 text-ammara-copper': activeDesign === 3
+                                  }">
+                                <i class="fa-solid fa-check"></i>
+                            </span>
+                            <p class="text-sm">Präzise Vorbereitung des Untergrunds</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="p-1.5 rounded-md flex items-center justify-center text-xs"
+                                  :class="{
+                                      'bg-white/10 text-ammara-gold': activeDesign === 1,
+                                      'bg-slate-100 text-slate-800': activeDesign === 2,
+                                      'bg-neutral-800 text-ammara-copper': activeDesign === 3
+                                  }">
+                                <i class="fa-solid fa-check"></i>
+                            </span>
+                            <p class="text-sm">Edle Bodenbeläge (Parkett, Laminat, Vinyl)</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="p-1.5 rounded-md flex items-center justify-center text-xs"
+                                  :class="{
+                                      'bg-white/10 text-ammara-gold': activeDesign === 1,
+                                      'bg-slate-100 text-slate-800': activeDesign === 2,
+                                      'bg-neutral-800 text-ammara-copper': activeDesign === 3
+                                  }">
+                                <i class="fa-solid fa-check"></i>
+                            </span>
+                            <p class="text-sm">Komplettsanierung aus einer Hand</p>
+                        </div>
+                    </div>
+
+                    <!-- Mini CTA inside card -->
+                    <div class="mt-8 pt-6 border-t"
+                         :class="{
+                             'border-white/10': activeDesign === 1,
+                             'border-slate-100': activeDesign === 2,
+                             'border-neutral-800': activeDesign === 3
+                         }">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="opacity-75">Unverbindlicher Beratungstermin:</span>
+                            <a href="#contact" class="font-bold underline uppercase tracking-widest hover:opacity-80">Online Buchen</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SERVICES SECTION                           -->
+    <!-- ========================================== -->
+    <section id="services" class="py-20 px-6 lg:px-16"
+             :class="{
+                 'bg-[#4d4a57] text-white': activeDesign === 1,
+                 'bg-white text-slate-800': activeDesign === 2,
+                 'bg-neutral-900 text-gray-100': activeDesign === 3
+             }">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <span class="text-xs uppercase tracking-widest font-bold"
+                      :class="{
+                          'text-ammara-gold': activeDesign === 1,
+                          'text-slate-500': activeDesign === 2,
+                          'text-ammara-copper': activeDesign === 3
+                      }">
+                    Unsere Kernkompetenzen
+                </span>
+                <h3 class="text-3xl lg:text-4xl font-bold"
+                    :class="{
+                        'font-serif': activeDesign === 1,
+                        'text-slate-900': activeDesign === 2,
+                        'font-mono': activeDesign === 3
+                    }">
+                    Erstklassige Leistungen
+                </h3>
+                <p class="text-sm opacity-80">
+                    Von der detaillierten Planung bis zum makellosen Endergebnis – wir renovieren mit architektonischem Blick fürs Ganze.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1: Renovierungsarbeiten -->
+                <div class="p-8 rounded-xl border transition-all duration-300 hover:scale-[1.02]"
+                     :class="{
+                         'bg-[#413e4b]/80 border-white/10 hover:border-ammara-gold': activeDesign === 1,
+                         'bg-slate-50 border-slate-200/80 hover:border-slate-400': activeDesign === 2,
+                         'bg-neutral-950 border-neutral-800 hover:border-ammara-copper': activeDesign === 3
+                     }">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center text-xl mb-6 shadow-sm"
+                         :class="{
+                             'bg-white/10 text-ammara-gold': activeDesign === 1,
+                             'bg-slate-200 text-slate-800': activeDesign === 2,
+                             'bg-neutral-800 text-ammara-copper': activeDesign === 3
+                         }">
+                        <i class="fa-solid fa-hammer"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3"
+                        :class="{
+                            'font-serif': activeDesign === 1,
+                            'text-slate-900': activeDesign === 2,
+                            'font-mono': activeDesign === 3
+                        }">
+                        Renovierung
+                    </h4>
+                    <p class="text-sm opacity-80 leading-relaxed mb-4">
+                        Trockenbau, professionelle Spachtel- und Malerarbeiten sowie Strukturveränderungen. Wir modernisieren Ihre Wände und Decken präzise und sauber.
+                    </p>
+                    <ul class="text-xs space-y-2 opacity-90">
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 opacity-70"></i> Maler & Tapezierarbeiten</li>
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 opacity-70"></i> Trockenbauwände & Decken</li>
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 opacity-70"></i> Altbausanierung</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2: Bodenlegearbeiten -->
+                <div class="p-8 rounded-xl border transition-all duration-300 hover:scale-[1.02]"
+                     :class="{
+                         'bg-[#413e4b]/80 border-white/10 hover:border-ammara-gold': activeDesign === 1,
+                         'bg-slate-50 border-slate-200/80 hover:border-slate-400': activeDesign === 2,
+                         'bg-neutral-950 border-neutral-800 hover:border-ammara-copper': activeDesign === 3
+                     }">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center text-xl mb-6 shadow-sm"
+                         :class="{
+                             'bg-white/10 text-ammara-gold': activeDesign === 1,
+                             'bg-slate-200 text-slate-800': activeDesign === 2,
+                             'bg-neutral-800 text-ammara-copper': activeDesign === 3
+                         }">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3"
+                        :class="{
+                            'font-serif': activeDesign === 1,
+                            'text-slate-900': activeDesign === 2,
+                            'font-mono': activeDesign === 3
+                        }">
+                        Bodenlegung
+                    </h4>
+                    <p class="text-sm opacity-80 leading-relaxed mb-4">
+                        Fachgerechte Verlegung von anspruchsvollen Bodenbelägen. Wir sorgen für erstklassige Trittschalldämmung und perfekte Fugenausrichtung.
+                    </p>
+                    <ul class="text-xs space-y-2 opacity-90">
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 opacity-70"></i> Echtholz-Parkett & Dielen</li>
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 opacity-70"></i> Hochwertiges Vinyl & Designböden</li>
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 opacity-70"></i> Laminat & Sockelleisten</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3: Komplettsanierung -->
+                <div class="p-8 rounded-xl border transition-all duration-300 hover:scale-[1.02]"
+                     :class="{
+                         'bg-[#413e4b]/80 border-white/10 hover:border-ammara-gold': activeDesign === 1,
+                         'bg-slate-50 border-slate-200/80 hover:border-slate-400': activeDesign === 2,
+                         'bg-neutral-950 border-neutral-800 hover:border-ammara-copper': activeDesign === 3
+                     }">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center text-xl mb-6 shadow-sm"
+                         :class="{
+                             'bg-white/10 text-ammara-gold': activeDesign === 1,
+                             'bg-slate-200 text-slate-800': activeDesign === 2,
+                             'bg-neutral-800 text-ammara-copper': activeDesign === 3
+                         }">
+                        <i class="fa-solid fa-house-chimney-crack"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3"
+                        :class="{
+                            'font-serif': activeDesign === 1,
+                            'text-slate-900': activeDesign === 2,
+                            'font-mono': activeDesign === 3
+                        }">
+                        Projektleitung
+                    </h4>
+                    <p class="text-sm opacity-80 leading-relaxed mb-4">
+                        Rundumsorglos-Sanierung Ihres Objektes. Wir koordinieren alle Gewerke und garantieren feste Absprachen, Termintreue und transparente Preise.
+                    </p>
+                    <ul class="text-xs space-y-2 opacity-90">
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 opacity-70"></i> Planung & Beratung vor Ort</li>
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 opacity-70"></i> Qualitätskontrollen & Abnahme</li>
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 opacity-70"></i> Komplettes Projektmanagement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- INTERACTIVE ESTIMATOR / CALCULATOR         -->
+    <!-- ========================================== -->
+    <section id="calculator" class="py-20 px-6 lg:px-16 border-t border-b"
+             :class="{
+                 'border-white/10 bg-[#5a5766]': activeDesign === 1,
+                 'border-slate-200 bg-slate-100': activeDesign === 2,
+                 'border-neutral-800 bg-neutral-950': activeDesign === 3
+             }">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-12 space-y-4">
+                <span class="text-xs uppercase tracking-widest font-bold"
+                      :class="{
+                          'text-ammara-gold': activeDesign === 1,
+                          'text-slate-500': activeDesign === 2,
+                          'text-ammara-copper': activeDesign === 3
+                      }">
+                    Budgetplaner
+                </span>
+                <h3 class="text-3xl font-bold"
+                    :class="{
+                        'font-serif text-white': activeDesign === 1,
+                        'text-slate-900': activeDesign === 2,
+                        'font-mono text-white': activeDesign === 3
+                    }">
+                    Sofort-Angebotsrechner
+                </h3>
+                <p class="text-sm opacity-80">
+                    Schätzen Sie unkompliziert die ungefähren Kosten für Ihr nächstes Projekt.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+                <!-- Inputs -->
+                <div class="md:col-span-7 p-8 rounded-xl border flex flex-col justify-between"
+                     :class="{
+                         'bg-[#413e4b] border-white/10': activeDesign === 1,
+                         'bg-white border-slate-200': activeDesign === 2,
+                         'bg-neutral-900 border-neutral-800': activeDesign === 3
+                     }">
+                    
+                    <div class="space-y-6">
+                        <!-- Option 1: Gewerk -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85">Leistungsbereich</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button @click="service = 'boden'" 
+                                        class="py-2 px-3 text-xs font-semibold rounded-lg border transition-all duration-200"
+                                        :class="service === 'boden' ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm' : 'border-slate-300 hover:bg-slate-200/30 text-current'">
+                                    Bodenlegung
+                                </button>
+                                <button @click="service = 'renovierung'" 
+                                        class="py-2 px-3 text-xs font-semibold rounded-lg border transition-all duration-200"
+                                        :class="service === 'renovierung' ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm' : 'border-slate-300 hover:bg-slate-200/30 text-current'">
+                                    Renovierung
+                                </button>
+                                <button @click="service = 'komplett'" 
+                                        class="py-2 px-3 text-xs font-semibold rounded-lg border transition-all duration-200"
+                                        :class="service === 'komplett' ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm' : 'border-slate-300 hover:bg-slate-200/30 text-current'">
+                                    Komplett
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Option 2: Area Slider -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="block text-xs font-bold uppercase tracking-wider opacity-85">Fläche (qm)</label>
+                                <span class="text-sm font-bold" x-text="area + ' m²'"></span>
+                            </div>
+                            <input type="range" min="10" max="250" step="5" x-model="area" 
+                                   class="w-full h-2 rounded-lg bg-slate-300 appearance-none cursor-pointer accent-indigo-600">
+                        </div>
+
+                        <!-- Option 3: Quality Segment -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85">Material- & Ausführungsklasse</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button @click="quality = 'standard'" 
+                                        class="py-2 px-3 text-xs font-semibold rounded-lg border transition-all duration-200"
+                                        :class="quality === 'standard' ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm' : 'border-slate-300 hover:bg-slate-200/30 text-current'">
+                                    Basis
+                                </button>
+                                <button @click="quality = 'premium'" 
+                                        class="py-2 px-3 text-xs font-semibold rounded-lg border transition-all duration-200"
+                                        :class="quality === 'premium' ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm' : 'border-slate-300 hover:bg-slate-200/30 text-current'">
+                                    Premium
+                                </button>
+                                <button @click="quality = 'exklusiv'" 
+                                        class="py-2 px-3 text-xs font-semibold rounded-lg border transition-all duration-200"
+                                        :class="quality === 'exklusiv' ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm' : 'border-slate-300 hover:bg-slate-200/30 text-current'">
+                                    Exklusiv
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs opacity-50 italic mt-6">
+                        *Dies ist eine unverbindliche Richtwertkalkulation inkl. durchschnittlicher Material- und Einbaukosten.
+                    </p>
+                </div>
+
+                <!-- Display Estimate Result -->
+                <div class="md:col-span-5 p-8 rounded-xl border flex flex-col justify-between text-center relative overflow-hidden"
+                     :class="{
+                         'bg-[#413e4b] border-white/10 text-white': activeDesign === 1,
+                         'bg-white border-slate-200 text-slate-800': activeDesign === 2,
+                         'bg-neutral-900 border-neutral-800 text-white': activeDesign === 3
+                     }">
+                    
+                    <div class="space-y-4 my-auto relative z-10">
+                        <span class="text-xs uppercase tracking-widest font-semibold opacity-75">Geschätztes Budget</span>
+                        <div class="text-5xl font-extrabold tracking-tight"
+                             :class="{
+                                 'text-ammara-gold font-serif': activeDesign === 1,
+                                 'text-slate-900 font-sans': activeDesign === 2,
+                                 'text-ammara-copper font-mono': activeDesign === 3
+                             }">
+                            ca. <span x-text="calculateEstimate().toLocaleString('de-DE')"></span> €
+                        </div>
+                        <p class="text-xs px-4 opacity-75">
+                            Basierend auf <strong x-text="area"></strong> m² mit <strong x-text="quality.toUpperCase()"></strong> Ausführung.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 border-t mt-6"
+                         :class="{
+                             'border-white/10': activeDesign === 1,
+                             'border-slate-100': activeDesign === 2,
+                             'border-neutral-800': activeDesign === 3
+                         }">
+                        <a href="#contact" 
+                           class="block w-full py-3 rounded-lg font-bold text-xs uppercase tracking-widest transition-all duration-300 hover:scale-[1.02] shadow-sm"
+                           :class="{
+                               'bg-ammara-gold text-slate-950 hover:bg-white': activeDesign === 1,
+                               'bg-slate-900 text-white hover:bg-slate-800': activeDesign === 2,
+                               'bg-ammara-copper text-white hover:bg-amber-600': activeDesign === 3
+                           }">
+                            Angebot anfordern
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- ABOUT SECTION                              -->
+    <!-- ========================================== -->
+    <section id="about" class="py-20 px-6 lg:px-16"
+             :class="{
+                 'bg-[#4d4a57] text-white': activeDesign === 1,
+                 'bg-white text-slate-800': activeDesign === 2,
+                 'bg-neutral-900 text-gray-100': activeDesign === 3
+             }">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Logo-inspired Brand Frame Graphic -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative p-12 max-w-sm rounded-3xl"
+                     :class="{
+                         'bg-[#413e4b] border border-white/10': activeDesign === 1,
+                         'bg-slate-100 border border-slate-200': activeDesign === 2,
+                         'bg-neutral-950 border border-neutral-800': activeDesign === 3
+                     }">
+                    
+                    <!-- Top accent box mirroring logo layout -->
+                    <div class="absolute inset-4 border rounded-2xl pointer-events-none opacity-20"
+                         :class="{
+                             'border-ammara-gold': activeDesign === 1,
+                             'border-slate-500': activeDesign === 2,
+                             'border-ammara-copper': activeDesign === 3
+                         }"></div>
+
+                    <div class="text-center relative z-10 space-y-6">
+                        <img src="image_c2d8c4.png" alt="Ammara Bau Logo Graphic" class="mx-auto w-32 h-auto object-contain rounded-lg">
+                        <div class="space-y-2">
+                            <h4 class="font-serif text-lg font-bold">100% Zuverlässig</h4>
+                            <p class="text-xs opacity-75">Ihr Partner für anspruchsvolle Raumgestaltung.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copy -->
+            <div class="lg:col-span-7 space-y-6">
+                <span class="text-xs uppercase tracking-widest font-bold"
+                      :class="{
+                          'text-ammara-gold': activeDesign === 1,
+                          'text-slate-500': activeDesign === 2,
+                          'text-ammara-copper': activeDesign === 3
+                      }">
+                    Unsere Philosophie
+                </span>
+                
+                <h3 class="text-3xl lg:text-4xl font-bold"
+                    :class="{
+                        'font-serif': activeDesign === 1,
+                        'text-slate-900': activeDesign === 2,
+                        'font-mono': activeDesign === 3
+                    }">
+                    Wir bringen Präzision und Stil in Einklang
+                </h3>
+
+                <p class="text-sm leading-relaxed opacity-85">
+                    Das architektonische Design unseres Logos repräsentiert exakt unsere Werte: klare Strukturen, präzise Linien und langlebige Bauweise. Ob aufwändige Komplettrenovierung oder das exakte Verlegen von Edelhölzern – Ammara Bau steht für handwerkliche Perfektion.
+                </p>
+
+                <div class="grid grid-cols-2 gap-4 pt-4">
+                    <div class="p-4 border rounded-lg"
+                         :class="{
+                             'bg-[#413e4b]/40 border-white/10': activeDesign === 1,
+                             'bg-slate-50 border-slate-200': activeDesign === 2,
+                             'bg-neutral-950/40 border-neutral-800': activeDesign === 3
+                         }">
+                        <div class="text-2xl font-bold"
+                             :class="{
+                                 'text-ammara-gold': activeDesign === 1,
+                                 'text-slate-900': activeDesign === 2,
+                                 'text-ammara-copper': activeDesign === 3
+                             }">150+</div>
+                        <div class="text-xs opacity-75 mt-1">Zufriedene Kunden</div>
+                    </div>
+                    <div class="p-4 border rounded-lg"
+                         :class="{
+                             'bg-[#413e4b]/40 border-white/10': activeDesign === 1,
+                             'bg-slate-50 border-slate-200': activeDesign === 2,
+                             'bg-neutral-950/40 border-neutral-800': activeDesign === 3
+                         }">
+                        <div class="text-2xl font-bold"
+                             :class="{
+                                 'text-ammara-gold': activeDesign === 1,
+                                 'text-slate-900': activeDesign === 2,
+                                 'text-ammara-copper': activeDesign === 3
+                             }">100%</div>
+                        <div class="text-xs opacity-75 mt-1">Meister-Qualität</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- CONTACT SECTION WITH INTERACTIVE FORM      -->
+    <!-- ========================================== -->
+    <section id="contact" class="py-20 px-6 lg:px-16 border-t"
+             :class="{
+                 'border-white/10 bg-[#5a5766]': activeDesign === 1,
+                 'border-slate-200 bg-slate-50': activeDesign === 2,
+                 'border-neutral-800 bg-neutral-950': activeDesign === 3
+             }">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-12 space-y-4">
+                <span class="text-xs uppercase tracking-widest font-bold"
+                      :class="{
+                          'text-ammara-gold': activeDesign === 1,
+                          'text-slate-500': activeDesign === 2,
+                          'text-ammara-copper': activeDesign === 3
+                      }">
+                    Kontaktieren Sie Uns
+                </span>
+                <h3 class="text-3xl font-bold"
+                    :class="{
+                        'font-serif text-white': activeDesign === 1,
+                        'text-slate-900': activeDesign === 2,
+                        'font-mono text-white': activeDesign === 3
+                    }">
+                    Kostenlose Erstberatung vereinbaren
+                </h3>
+                <p class="text-sm opacity-80">
+                    Sprechen wir über Ihr Vorhaben. Füllen Sie einfach das Formular aus – wir rufen zurück.
+                </p>
+            </div>
+
+            <div class="p-8 rounded-xl border relative"
+                 :class="{
+                     'bg-[#413e4b] border-white/10': activeDesign === 1,
+                     'bg-white border-slate-200 shadow-md': activeDesign === 2,
+                     'bg-neutral-900 border-neutral-800': activeDesign === 3
+                 }">
+                
+                <!-- Submission Message Success state -->
+                <div x-show="contactSubmitted" class="text-center py-12 space-y-4">
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h4 class="text-xl font-bold">Vielen Dank für Ihre Anfrage!</h4>
+                    <p class="text-sm opacity-85">Wir haben Ihre Projektdetails erhalten und melden uns innerhalb von 24 Stunden bei Ihnen.</p>
+                    <button @click="contactSubmitted = false" class="text-xs font-bold underline uppercase tracking-widest opacity-80 hover:opacity-100">Neue Anfrage senden</button>
+                </div>
+
+                <!-- Actual Form Fields -->
+                <form x-show="!contactSubmitted" @submit.prevent="contactSubmitted = true" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85">Name</label>
+                            <input required type="text" x-model="contactName" placeholder="Z.B. Max Mustermann" 
+                                   class="w-full px-4 py-3 rounded-lg border text-sm transition focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                                   :class="{
+                                       'bg-slate-700/50 border-slate-600 text-white': activeDesign === 1,
+                                       'bg-white border-slate-300 text-slate-800': activeDesign === 2,
+                                       'bg-neutral-950 border-neutral-800 text-white': activeDesign === 3
+                                   }">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85">E-Mail Adresse</label>
+                            <input required type="email" x-model="contactEmail" placeholder="Z.B. info@ammara.de" 
+                                   class="w-full px-4 py-3 rounded-lg border text-sm transition focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                                   :class="{
+                                       'bg-slate-700/50 border-slate-600 text-white': activeDesign === 1,
+                                       'bg-white border-slate-300 text-slate-800': activeDesign === 2,
+                                       'bg-neutral-950 border-neutral-800 text-white': activeDesign === 3
+                                   }">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85">Wie können wir Ihnen helfen?</label>
+                        <textarea required rows="4" placeholder="Z.B. Verlegen von 70m² Fertigparkett und anschließendes Streichen der Wände." 
+                                  class="w-full px-4 py-3 rounded-lg border text-sm transition focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                                  :class="{
+                                      'bg-slate-700/50 border-slate-600 text-white': activeDesign === 1,
+                                      'bg-white border-slate-300 text-slate-800': activeDesign === 2,
+                                      'bg-neutral-950 border-neutral-800 text-white': activeDesign === 3
+                                  }"></textarea>
+                    </div>
+
+                    <button type="submit" 
+                            class="w-full py-4 rounded-lg font-bold text-sm tracking-wider uppercase transition-all duration-300 hover:scale-[1.01] shadow-lg"
+                            :class="{
+                                'bg-ammara-gold text-slate-950 hover:bg-white': activeDesign === 1,
+                                'bg-slate-900 text-white hover:bg-slate-800': activeDesign === 2,
+                                'bg-ammara-copper text-white hover:bg-amber-600': activeDesign === 3
+                            }">
+                        Anfrage Absenden <i class="fa-solid fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FOOTER                                     -->
+    <!-- ========================================== -->
+    <footer class="py-12 px-6 lg:px-16"
+            :class="{
+                'bg-black/25 text-white/70': activeDesign === 1,
+                'bg-slate-900 text-slate-400': activeDesign === 2,
+                'bg-black text-gray-500': activeDesign === 3
+            }">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs border-t pt-8"
+             :class="{
+                 'border-white/10': activeDesign === 1,
+                 'border-slate-800': activeDesign === 2,
+                 'border-neutral-900': activeDesign === 3
+             }">
+            <div class="flex items-center gap-4">
+                <img src="image_c2d8c4.png" alt="Ammara Bau Logo Footer" class="h-10 w-auto object-contain brightness-95">
+                <div>
+                    <p class="font-bold text-sm text-current">AMMARA BAU</p>
+                    <p>© 2026. Alle Rechte vorbehalten.</p>
+                </div>
+            </div>
+
+            <div class="flex gap-6">
+                <a href="#" class="hover:underline">Impressum</a>
+                <a href="#" class="hover:underline">Datenschutz</a>
+                <a href="#" class="hover:underline">AGB</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
