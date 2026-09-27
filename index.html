@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" x-data="{ isDark: true }" :class="{ 'dark': isDark }">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,9 +20,11 @@
         .theme-transition {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        [x-cloak] { display: none !important; }
     </style>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -51,9 +53,7 @@
     contactSubmitted: false,
     contactSending: false,
     
-    // =========================================================================
-    // FORMULAR ABSENDEN PER AJAX (E-Mail an ammarabau94@gmail.com)
-    // =========================================================================
+    // Formular Absenden
     async submitForm(e) {
         this.contactSending = true;
         const formData = new FormData(e.target);
@@ -79,25 +79,25 @@
         }
     }
 }" 
-class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
+class="bg-gray-50 text-gray-900 dark:bg-[#121214] dark:text-gray-100 font-sans antialiased theme-transition">
 
     <!-- ========================================== -->
     <!-- TOP BAR (KONTAKT & ERREICHBARKEIT)         -->
     <!-- ========================================== -->
-    <div class="bg-neutral-950 border-b border-neutral-900 py-2.5 px-6 lg:px-16 text-xs text-neutral-400">
+    <div class="bg-white dark:bg-neutral-950 border-b border-gray-200 dark:border-neutral-900 py-2.5 px-6 lg:px-16 text-xs text-gray-500 dark:text-neutral-400 transition-colors duration-300">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
             <div class="flex flex-wrap justify-center sm:justify-start items-center gap-x-4 gap-y-1">
                 <a href="tel:+4915756184186" class="hover:text-ammara-copper transition-colors flex items-center gap-1.5">
                     <i class="fa-solid fa-phone text-ammara-copper"></i> 
-                    <span>Mobil: <strong class="font-mono text-gray-300 font-medium hover:underline">+49 157 56184186</strong></span>
+                    <span>Mobil: <strong class="font-mono text-gray-900 dark:text-gray-300 font-medium hover:underline">+49 157 56184186</strong></span>
                 </a>
-                <span class="hidden sm:inline text-neutral-800">|</span>
+                <span class="hidden sm:inline text-gray-300 dark:text-neutral-800">|</span>
                 <span class="flex items-center gap-1.5">
                     <i class="fa-solid fa-clock text-ammara-copper"></i> 
-                    <span>Erreichbar: <strong class="text-gray-300 font-medium">Von 9:00 bis 18:00 Uhr</strong></span>
+                    <span>Erreichbar: <strong class="text-gray-900 dark:text-gray-300 font-medium">Von 9:00 bis 18:00 Uhr</strong></span>
                 </span>
             </div>
-            <div class="text-[11px] text-neutral-500 hidden md:block uppercase tracking-wider font-mono">
+            <div class="text-[11px] text-gray-500 dark:text-neutral-500 hidden md:block uppercase tracking-wider font-mono">
                 Rufen Sie uns gerne für ein Erstgespräch an
             </div>
         </div>
@@ -106,7 +106,7 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
     <!-- ========================================== -->
     <!-- HEADER SECTION                             -->
     <!-- ========================================== -->
-    <header class="border-b border-neutral-800 bg-neutral-950 py-6 px-6 lg:px-16">
+    <header class="border-b border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 py-6 px-6 lg:px-16 transition-colors duration-300">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
             <!-- Brand Logo Frame -->
             <div class="flex items-center gap-4">
@@ -114,7 +114,7 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
                     <img src="ammarabau_logo.png" alt="Ammara Bau Logo" class="h-16 w-auto object-contain block">
                 </div>
                 <div>
-                    <h1 class="text-2xl font-bold tracking-widest uppercase font-mono text-white">
+                    <h1 class="text-2xl font-bold tracking-widest uppercase font-mono text-gray-900 dark:text-white">
                         AMMARA BAU
                     </h1>
                     <p class="text-xs uppercase tracking-widest text-ammara-copper font-mono">
@@ -124,12 +124,17 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
             </div>
 
             <!-- Navigation -->
-            <nav class="flex items-center gap-6 text-sm font-medium text-gray-300">
+            <nav class="flex items-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-300">
                 <a href="#services" class="hover:text-ammara-copper transition">Leistungen</a>
                 <a href="#about" class="hover:text-ammara-copper transition">Über Uns</a>
                 <a href="#contact" class="px-4 py-2 rounded text-xs uppercase tracking-widest font-semibold border border-ammara-copper text-ammara-copper hover:bg-ammara-copper hover:text-white transition-all duration-300">
                     Kontakt
                 </a>
+                <!-- Light/Dark Mode Toggle -->
+                <button @click="isDark = !isDark" class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 transition-colors text-gray-600 dark:text-gray-300" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon" x-show="!isDark"></i>
+                    <i class="fa-solid fa-sun" x-show="isDark" x-cloak></i>
+                </button>
             </nav>
         </div>
     </header>
@@ -137,9 +142,9 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
     <!-- ========================================== -->
     <!-- HERO SECTION                               -->
     <!-- ========================================== -->
-    <section class="relative overflow-hidden py-16 lg:py-28 px-6 lg:px-16 border-b border-neutral-800 bg-gradient-to-br from-neutral-950 via-[#1e1e24] to-neutral-950">
-        <div class="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-end pr-20">
-            <svg class="w-1/3 h-auto text-white" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+    <section class="relative overflow-hidden py-16 lg:py-28 px-6 lg:px-16 border-b border-gray-200 dark:border-neutral-800 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-neutral-950 dark:via-[#1e1e24] dark:to-neutral-950 transition-colors duration-300">
+        <div class="absolute inset-0 opacity-5 dark:opacity-10 pointer-events-none flex items-center justify-end pr-20">
+            <svg class="w-1/3 h-auto text-gray-900 dark:text-white" viewBox="0 0 100 100" fill="none" stroke="currentColor">
                 <rect x="10" y="10" width="80" height="80" stroke-width="2"/>
                 <line x1="30" y1="90" x2="30" y2="40" stroke-width="2"/>
                 <line x1="40" y1="90" x2="40" y2="30" stroke-width="2"/>
@@ -152,70 +157,72 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
 
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
             <div class="lg:col-span-7 space-y-6">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-800 text-ammara-copper border border-neutral-700">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-gray-100 dark:bg-neutral-800 text-ammara-copper border border-gray-200 dark:border-neutral-700">
                     <i class="fa-solid fa-award"></i> Handwerkskunst auf höchstem Niveau
                 </div>
                 
-                <h2 class="text-4xl lg:text-6xl font-extrabold leading-tight tracking-wide font-mono text-white">
+                <h2 class="text-4xl lg:text-6xl font-extrabold leading-tight tracking-wide font-mono text-gray-900 dark:text-white">
                     Räume neu definiert. <br>
                     <span class="text-ammara-copper">Meisterhaft verlegt.</span>
                 </h2>
 
-                <p class="text-lg leading-relaxed max-w-xl text-neutral-400">
+                <p class="text-lg leading-relaxed max-w-xl text-gray-600 dark:text-neutral-400">
                     Ammara Bau steht für kompromisslose Qualität bei Renovierungsarbeiten und anspruchsvoller Bodenlegung. Wir bringen Struktur, Langlebigkeit und erstklassige Materialien in Ihr Zuhause oder Büro.
                 </p>
 
                 <div class="flex flex-wrap gap-4 pt-4">
                     <a href="#services" 
-                       class="px-8 py-4 rounded-lg font-bold text-sm tracking-wider uppercase transition-all duration-300 border border-neutral-700 bg-ammara-copper text-white hover:bg-ammara-copperHover shadow-lg hover:-translate-y-0.5">
+                       class="px-8 py-4 rounded-lg font-bold text-sm tracking-wider uppercase transition-all duration-300 border border-transparent bg-ammara-copper text-white hover:bg-ammara-copperHover shadow-lg hover:-translate-y-0.5">
                         Unsere Leistungen
                     </a>
                 </div>
             </div>
 
             <div class="lg:col-span-5">
-                <div class="p-8 rounded-2xl relative shadow-2xl overflow-hidden border bg-neutral-900 border-neutral-800">
+                <div class="p-8 rounded-2xl relative shadow-xl dark:shadow-2xl overflow-hidden border bg-white dark:bg-neutral-900 border-gray-200 dark:border-neutral-800 transition-colors duration-300">
                     <div class="absolute -right-12 -bottom-12 opacity-5 pointer-events-none">
                         <img src="ammarabau_logo.png" alt="Branding" class="w-64 h-auto">
                     </div>
 
                     <div class="flex justify-between items-start mb-6">
                         <div>
-                            <span class="text-xs uppercase tracking-widest font-semibold text-slate-400">
+                            <span class="text-xs uppercase tracking-widest font-semibold text-gray-500 dark:text-slate-400">
                                 Ihr Renovierungsprojekt
                             </span>
-                            <h4 class="text-xl font-bold mt-1 text-white font-mono">
+                            <h4 class="text-xl font-bold mt-1 text-gray-900 dark:text-white font-mono">
                                 Premium Standard
                             </h4>
                         </div>
                         <i class="fa-solid fa-square-poll-vertical text-3xl text-ammara-copper"></i>
                     </div>
 
-                    <div class="space-y-4 relative z-10 text-white">
+                    <div class="space-y-4 relative z-10 text-gray-800 dark:text-white">
                         <div class="flex items-center gap-3">
-                            <span class="p-1.5 rounded-md flex items-center justify-center text-xs bg-neutral-800 text-ammara-copper">
+                            <span class="p-1.5 rounded-md flex items-center justify-center text-xs bg-gray-100 dark:bg-neutral-800 text-ammara-copper">
                                 <i class="fa-solid fa-check"></i>
                             </span>
                             <p class="text-sm">Präzise Vorbereitung des Untergrunds</p>
                         </div>
                         <div class="flex items-center gap-3">
-                            <span class="p-1.5 rounded-md flex items-center justify-center text-xs bg-neutral-800 text-ammara-copper">
+                            <span class="p-1.5 rounded-md flex items-center justify-center text-xs bg-gray-100 dark:bg-neutral-800 text-ammara-copper">
                                 <i class="fa-solid fa-check"></i>
                             </span>
                             <p class="text-sm">Edle Bodenbeläge (Parkett, Laminat, Vinyl)</p>
                         </div>
                         <div class="flex items-center gap-3">
-                            <span class="p-1.5 rounded-md flex items-center justify-center text-xs bg-neutral-800 text-ammara-copper">
+                            <span class="p-1.5 rounded-md flex items-center justify-center text-xs bg-gray-100 dark:bg-neutral-800 text-ammara-copper">
                                 <i class="fa-solid fa-check"></i>
                             </span>
                             <p class="text-sm">Komplettsanierung aus einer Hand</p>
                         </div>
                     </div>
 
-                    <div class="mt-8 pt-6 border-t border-neutral-800">
-                        <div class="flex items-center justify-between text-xs text-white">
-                            <span class="opacity-75">Unverbindliche Beratung:</span>
-                            <a href="#contact" class="font-bold underline uppercase tracking-widest hover:text-ammara-copper">Jetzt Buchen</a>
+                    <div class="mt-8 pt-6 border-t border-gray-200 dark:border-neutral-800">
+                        <div class="flex items-center justify-between text-xs text-gray-800 dark:text-white">
+                            <span class="opacity-75 font-medium">Unverbindliche Beratung:</span>
+                            <a href="#contact" class="px-5 py-2.5 rounded-lg font-bold uppercase tracking-widest transition-all duration-300 bg-ammara-copper text-white hover:bg-ammara-copperHover shadow-md hover:-translate-y-0.5">
+                                Jetzt Buchen
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -226,51 +233,51 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
     <!-- ========================================== -->
     <!-- SERVICES SECTION                           -->
     <!-- ========================================== -->
-    <section id="services" class="py-20 px-6 lg:px-16 bg-neutral-900 text-gray-100">
+    <section id="services" class="py-20 px-6 lg:px-16 bg-gray-50 dark:bg-neutral-900 transition-colors duration-300 text-gray-900 dark:text-gray-100">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
                 <span class="text-xs uppercase tracking-widest font-bold text-ammara-copper font-mono">
                     Unsere Kernkompetenzen
                 </span>
-                <h3 class="text-3xl lg:text-4xl font-bold font-mono text-white">
+                <h3 class="text-3xl lg:text-4xl font-bold font-mono text-gray-900 dark:text-white">
                     Erstklassige Leistungen
                 </h3>
-                <p class="text-sm opacity-80">
+                <p class="text-sm opacity-80 text-gray-600 dark:text-gray-300">
                     Von der detaillierten Planung bis zum makellosen Endergebnis – wir renovieren mit architektonischem Blick fürs Ganze.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- Service 1: Wand- & Flächenvorbereitung -->
-                <div class="p-8 rounded-xl border bg-neutral-950 border-neutral-800 hover:border-ammara-copper transition-all duration-300 hover:scale-[1.02]">
-                    <div class="w-12 h-12 rounded-lg flex items-center justify-center text-xl mb-6 shadow-sm bg-neutral-800 text-ammara-copper">
+                <!-- Service 1 -->
+                <div class="p-8 rounded-xl border bg-white dark:bg-neutral-950 border-gray-200 dark:border-neutral-800 hover:border-ammara-copper dark:hover:border-ammara-copper transition-all duration-300 hover:scale-[1.02]">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center text-xl mb-6 shadow-sm bg-gray-100 dark:bg-neutral-800 text-ammara-copper">
                         <i class="fa-solid fa-hammer"></i>
                     </div>
-                    <h4 class="text-xl font-bold mb-3 font-mono text-white">
+                    <h4 class="text-xl font-bold mb-3 font-mono text-gray-900 dark:text-white">
                         Wand- & Flächenvorbereitung
                     </h4>
-                    <p class="text-sm opacity-80 leading-relaxed mb-4">
+                    <p class="text-sm opacity-80 leading-relaxed mb-4 text-gray-700 dark:text-gray-300">
                         Professionelle Untergrundvorbereitung und Wandgestaltung. Wir sorgen für glatte Oberflächen und präzise Anstriche.
                     </p>
-                    <ul class="text-xs space-y-2 opacity-90 text-neutral-300">
+                    <ul class="text-xs space-y-2 opacity-90 text-gray-600 dark:text-neutral-300">
                         <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Spachtelarbeiten & Ausgleich</li>
                         <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Malerarbeiten (Painting)</li>
                         <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Tapezierarbeiten</li>
                     </ul>
                 </div>
 
-                <!-- Service 2: Bodenlegearbeiten -->
-                <div class="p-8 rounded-xl border bg-neutral-950 border-neutral-800 hover:border-ammara-copper transition-all duration-300 hover:scale-[1.02]">
-                    <div class="w-12 h-12 rounded-lg flex items-center justify-center text-xl mb-6 shadow-sm bg-neutral-800 text-ammara-copper">
+                <!-- Service 2 -->
+                <div class="p-8 rounded-xl border bg-white dark:bg-neutral-950 border-gray-200 dark:border-neutral-800 hover:border-ammara-copper dark:hover:border-ammara-copper transition-all duration-300 hover:scale-[1.02]">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center text-xl mb-6 shadow-sm bg-gray-100 dark:bg-neutral-800 text-ammara-copper">
                         <i class="fa-solid fa-layer-group"></i>
                     </div>
-                    <h4 class="text-xl font-bold mb-3 font-mono text-white">
+                    <h4 class="text-xl font-bold mb-3 font-mono text-gray-900 dark:text-white">
                         Bodenlegung
                     </h4>
-                    <p class="text-sm opacity-80 leading-relaxed mb-4">
+                    <p class="text-sm opacity-80 leading-relaxed mb-4 text-gray-700 dark:text-gray-300">
                         Fachgerechte Verlegung von Premium-Bodenbelägen. Wir garantieren erstklassige Trittschalldämmung und perfekte Fugenausrichtung.
                     </p>
-                    <ul class="text-xs space-y-2 opacity-90 text-neutral-300">
+                    <ul class="text-xs space-y-2 opacity-90 text-gray-600 dark:text-neutral-300">
                         <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Echtholz-Parkett & Dielen</li>
                         <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Laminat, Vinyl, PVC-Folie & Designbelag</li>
                         <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Fliesen & Keramik</li>
@@ -283,11 +290,11 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
     <!-- ========================================== -->
     <!-- ABOUT SECTION                              -->
     <!-- ========================================== -->
-    <section id="about" class="py-20 px-6 lg:px-16 border-t border-neutral-800 bg-neutral-900 text-gray-100">
+    <section id="about" class="py-20 px-6 lg:px-16 border-t border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div class="lg:col-span-5 flex justify-center">
-                <div class="relative p-12 max-w-sm rounded-3xl bg-neutral-950 border border-neutral-800 shadow-xl w-full">
+                <div class="relative p-12 max-w-sm rounded-3xl bg-gray-50 dark:bg-neutral-950 border border-gray-200 dark:border-neutral-800 shadow-xl w-full">
                     <div class="absolute inset-4 border rounded-2xl pointer-events-none opacity-20 border-ammara-copper"></div>
 
                     <div class="text-center relative z-10 space-y-6">
@@ -295,8 +302,8 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
                             <img src="ammarabau_logo.png" alt="Ammara Bau Logo Graphic" class="mx-auto w-32 h-auto object-contain">
                         </div>
                         <div class="space-y-2">
-                            <h4 class="font-mono text-lg font-bold text-white">100% Zuverlässig</h4>
-                            <p class="text-xs opacity-75">Ihr Partner für anspruchsvolle Raumgestaltung.</p>
+                            <h4 class="font-mono text-lg font-bold text-gray-900 dark:text-white">100% Zuverlässig</h4>
+                            <p class="text-xs opacity-75 text-gray-600 dark:text-gray-300">Ihr Partner für anspruchsvolle Raumgestaltung.</p>
                         </div>
                     </div>
                 </div>
@@ -307,22 +314,22 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
                     Unsere Philosophie
                 </span>
                 
-                <h3 class="text-3xl lg:text-4xl font-bold font-mono text-white">
+                <h3 class="text-3xl lg:text-4xl font-bold font-mono text-gray-900 dark:text-white">
                     Wir bringen Präzision und Stil in Einklang
                 </h3>
 
-                <p class="text-sm leading-relaxed opacity-85 text-neutral-300">
+                <p class="text-sm leading-relaxed opacity-85 text-gray-600 dark:text-neutral-300">
                     Das architektonische Design unseres Logos repräsentiert exakt unsere Werte: klare Strukturen, präzise Linien und langlebige Bauweise. Ob aufwändige Komplettrenovierung oder das exakte Verlegen von Edelhölzern – Ammara Bau steht für handwerkliche Perfektion.
                 </p>
 
                 <div class="grid grid-cols-2 gap-4 pt-4">
-                    <div class="p-4 border rounded-lg bg-neutral-950/40 border-neutral-800">
+                    <div class="p-4 border rounded-lg bg-gray-50 dark:bg-neutral-950/40 border-gray-200 dark:border-neutral-800">
                         <div class="text-2xl font-bold text-ammara-copper font-mono">150+</div>
-                        <div class="text-xs opacity-75 mt-1">Zufriedene Kunden</div>
+                        <div class="text-xs opacity-75 mt-1 text-gray-600 dark:text-gray-300">Zufriedene Kunden</div>
                     </div>
-                    <div class="p-4 border rounded-lg bg-neutral-950/40 border-neutral-800">
+                    <div class="p-4 border rounded-lg bg-gray-50 dark:bg-neutral-950/40 border-gray-200 dark:border-neutral-800">
                         <div class="text-2xl font-bold text-ammara-copper font-mono">100%</div>
-                        <div class="text-xs opacity-75 mt-1">Meister-Qualität</div>
+                        <div class="text-xs opacity-75 mt-1 text-gray-600 dark:text-gray-300">Meister-Qualität</div>
                     </div>
                 </div>
             </div>
@@ -332,51 +339,51 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
     <!-- ========================================== -->
     <!-- CONTACT SECTION WITH INTERACTIVE FORM      -->
     <!-- ========================================== -->
-    <section id="contact" class="py-20 px-6 lg:px-16 border-t border-neutral-800 bg-neutral-950">
+    <section id="contact" class="py-20 px-6 lg:px-16 border-t border-gray-200 dark:border-neutral-800 bg-gray-50 dark:bg-neutral-950 transition-colors duration-300">
         <div class="max-w-4xl mx-auto">
             <div class="text-center max-w-2xl mx-auto mb-10 space-y-4">
                 <span class="text-xs uppercase tracking-widest font-bold text-ammara-copper font-mono">
                     Kontaktieren Sie Uns
                 </span>
-                <h3 class="text-3xl lg:text-4xl font-bold font-mono text-white">
+                <h3 class="text-3xl lg:text-4xl font-bold font-mono text-gray-900 dark:text-white">
                     Kostenlose Erstberatung vereinbaren
                 </h3>
             </div>
 
-            <div class="bg-neutral-900 border border-neutral-800 p-8 md:p-10 rounded-2xl text-center mb-10 max-w-2xl mx-auto shadow-xl hover:border-ammara-copper transition duration-300 group">
+            <div class="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-8 md:p-10 rounded-2xl text-center mb-10 max-w-2xl mx-auto shadow-xl hover:border-ammara-copper transition duration-300 group">
                 <div class="w-14 h-14 rounded-full bg-ammara-copper/10 text-ammara-copper flex items-center justify-center mx-auto mb-4 text-xl group-hover:scale-110 transition duration-300">
                     <i class="fa-solid fa-phone"></i>
                 </div>
-                <p class="text-sm md:text-base uppercase tracking-widest text-neutral-300 font-mono mb-2 font-semibold">Rufen Sie uns direkt an</p>
-                <a href="tel:+4915756184186" class="block text-3xl md:text-5xl font-extrabold text-white font-mono tracking-wide hover:text-ammara-copper hover:underline transition-colors duration-200">
+                <p class="text-sm md:text-base uppercase tracking-widest text-gray-500 dark:text-neutral-300 font-mono mb-2 font-semibold">Rufen Sie uns direkt an</p>
+                <a href="tel:+4915756184186" class="block text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white font-mono tracking-wide hover:text-ammara-copper dark:hover:text-ammara-copper hover:underline transition-colors duration-200">
                     +49 157 56184186
                 </a>
-                <p class="text-sm md:text-base text-neutral-300 mt-4 font-medium flex items-center justify-center gap-2">
+                <p class="text-sm md:text-base text-gray-600 dark:text-neutral-300 mt-4 font-medium flex items-center justify-center gap-2">
                     <i class="fa-solid fa-clock text-ammara-copper text-lg"></i> 
-                    <span>Werktags erreichbar: <strong class="text-white hover:text-ammara-copper transition-colors">Von 9:00 bis 18:00 Uhr</strong></span>
+                    <span>Werktags erreichbar: <strong class="text-gray-900 dark:text-white hover:text-ammara-copper transition-colors">Von 9:00 bis 18:00 Uhr</strong></span>
                 </p>
             </div>
 
             <div class="flex items-center justify-center gap-4 my-10 max-w-xl mx-auto">
-                <div class="h-[1px] bg-neutral-800 flex-grow"></div>
-                <span class="text-xs uppercase tracking-widest text-neutral-500 font-mono font-bold">ODER</span>
-                <div class="h-[1px] bg-neutral-800 flex-grow"></div>
+                <div class="h-[1px] bg-gray-300 dark:bg-neutral-800 flex-grow"></div>
+                <span class="text-xs uppercase tracking-widest text-gray-400 dark:text-neutral-500 font-mono font-bold">ODER</span>
+                <div class="h-[1px] bg-gray-300 dark:bg-neutral-800 flex-grow"></div>
             </div>
 
             <div class="text-center mb-8">
-                <h4 class="text-xl font-bold text-white font-mono">Füllen Sie unser Kontaktformular aus</h4>
-                <p class="text-sm text-neutral-400 mt-2">Wir melden uns innerhalb von 24 Stunden mit einem unverbindlichen Angebot bei Ihnen.</p>
+                <h4 class="text-xl font-bold text-gray-900 dark:text-white font-mono">Füllen Sie unser Kontaktformular aus</h4>
+                <p class="text-sm text-gray-500 dark:text-neutral-400 mt-2">Wir melden uns innerhalb von 24 Stunden mit einem unverbindlichen Angebot bei Ihnen.</p>
             </div>
 
-            <div class="p-8 rounded-xl border relative bg-neutral-900 border-neutral-800">
+            <div class="p-8 rounded-xl border relative bg-white dark:bg-neutral-900 border-gray-200 dark:border-neutral-800 shadow-sm transition-colors duration-300">
                 
                 <div x-show="contactSubmitted" class="text-center py-12 space-y-4">
-                    <div class="w-16 h-16 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded-full flex items-center justify-center mx-auto text-2xl">
+                    <div class="w-16 h-16 bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 rounded-full flex items-center justify-center mx-auto text-2xl">
                         <i class="fa-solid fa-check"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-white">Vielen Dank für Ihre Anfrage!</h4>
-                    <p class="text-sm opacity-85 text-neutral-300">Wir haben Ihre Projektdetails erhalten und melden uns innerhalb von 24 Stunden bei Ihnen.</p>
-                    <button @click="contactSubmitted = false" class="text-xs font-bold underline uppercase tracking-widest text-ammara-copper hover:text-white mt-4">Neue Anfrage senden</button>
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Vielen Dank für Ihre Anfrage!</h4>
+                    <p class="text-sm opacity-85 text-gray-600 dark:text-neutral-300">Wir haben Ihre Projektdetails erhalten und melden uns innerhalb von 24 Stunden bei Ihnen.</p>
+                    <button @click="contactSubmitted = false" class="text-xs font-bold underline uppercase tracking-widest text-ammara-copper hover:text-gray-900 dark:hover:text-white mt-4">Neue Anfrage senden</button>
                 </div>
 
                 <form x-show="!contactSubmitted" @submit.prevent="submitForm" class="space-y-6">
@@ -386,34 +393,34 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85 text-white font-mono">Name</label>
+                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85 text-gray-900 dark:text-white font-mono">Name</label>
                             <input required type="text" name="name" x-model="contactName" placeholder="Z.B. Max Mustermann" 
-                                   class="w-full px-4 py-3 rounded-lg border text-sm transition focus:outline-none focus:ring-2 focus:ring-ammara-copper bg-neutral-950 border-neutral-800 text-white">
+                                   class="w-full px-4 py-3 rounded-lg border text-sm transition focus:outline-none focus:ring-2 focus:ring-ammara-copper bg-gray-50 dark:bg-neutral-950 border-gray-300 dark:border-neutral-800 text-gray-900 dark:text-white">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85 text-white font-mono">E-Mail Adresse</label>
+                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85 text-gray-900 dark:text-white font-mono">E-Mail Adresse</label>
                             <input required type="email" name="email" x-model="contactEmail" placeholder="Z.B. info@ammara.de" 
-                                   class="w-full px-4 py-3 rounded-lg border text-sm transition focus:outline-none focus:ring-2 focus:ring-ammara-copper bg-neutral-950 border-neutral-800 text-white">
+                                   class="w-full px-4 py-3 rounded-lg border text-sm transition focus:outline-none focus:ring-2 focus:ring-ammara-copper bg-gray-50 dark:bg-neutral-950 border-gray-300 dark:border-neutral-800 text-gray-900 dark:text-white">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85 text-white font-mono">Telefonnummer</label>
+                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85 text-gray-900 dark:text-white font-mono">Telefonnummer</label>
                             <input required type="tel" name="phone" x-model="contactPhone" placeholder="Z.B. +49 157 56184186" 
-                                   class="w-full px-4 py-3 rounded-lg border text-sm transition focus:outline-none focus:ring-2 focus:ring-ammara-copper bg-neutral-950 border-neutral-800 text-white">
+                                   class="w-full px-4 py-3 rounded-lg border text-sm transition focus:outline-none focus:ring-2 focus:ring-ammara-copper bg-gray-50 dark:bg-neutral-950 border-gray-300 dark:border-neutral-800 text-gray-900 dark:text-white">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85 text-white font-mono">Beste Erreichbarkeit (Uhrzeit)</label>
+                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85 text-gray-900 dark:text-white font-mono">Beste Erreichbarkeit (Uhrzeit)</label>
                             <input type="text" name="callback_time" x-model="contactTime" placeholder="Z.B. Werktags 14:00 - 18:00 Uhr" 
-                                   class="w-full px-4 py-3 rounded-lg border text-sm transition focus:outline-none focus:ring-2 focus:ring-ammara-copper bg-neutral-950 border-neutral-800 text-white">
+                                   class="w-full px-4 py-3 rounded-lg border text-sm transition focus:outline-none focus:ring-2 focus:ring-ammara-copper bg-gray-50 dark:bg-neutral-950 border-gray-300 dark:border-neutral-800 text-gray-900 dark:text-white">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85 text-white font-mono">Wie können wir Ihnen helfen?</label>
+                        <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85 text-gray-900 dark:text-white font-mono">Wie können wir Ihnen helfen?</label>
                         <textarea required name="message" rows="4" placeholder="Z.B. Verlegen von 70m² Fertigparkett und anschließendes Streichen der Wände." 
-                                  class="w-full px-4 py-3 rounded-lg border text-sm transition focus:outline-none focus:ring-2 focus:ring-ammara-copper bg-neutral-950 border-neutral-800 text-white"></textarea>
+                                  class="w-full px-4 py-3 rounded-lg border text-sm transition focus:outline-none focus:ring-2 focus:ring-ammara-copper bg-gray-50 dark:bg-neutral-950 border-gray-300 dark:border-neutral-800 text-gray-900 dark:text-white"></textarea>
                     </div>
 
                     <button type="submit" :disabled="contactSending"
@@ -422,7 +429,6 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
                         <span x-show="contactSending">Wird gesendet... <i class="fa-solid fa-spinner animate-spin ml-2"></i></span>
                     </button>
                 </form>
-
             </div>
         </div>
     </section>
@@ -430,22 +436,22 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
     <!-- ========================================== -->
     <!-- FOOTER                                     -->
     <!-- ========================================== -->
-    <footer class="py-12 px-6 lg:px-16 bg-black text-gray-500">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs border-t pt-8 border-neutral-900">
+    <footer class="py-12 px-6 lg:px-16 bg-white dark:bg-black text-gray-500 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs border-t pt-8 border-gray-200 dark:border-neutral-900">
             <div class="flex items-center gap-4">
                 <div class="p-1 rounded bg-[#5a5766] inline-block shadow">
                     <img src="ammarabau_logo.png" alt="Ammara Bau Logo Footer" class="h-10 w-auto object-contain brightness-95">
                 </div>
                 <div>
-                    <p class="font-bold text-sm text-white">AMMARA BAU</p>
+                    <p class="font-bold text-sm text-gray-900 dark:text-white">AMMARA BAU</p>
                     <p>© 2026. Alle Rechte vorbehalten.</p>
                 </div>
             </div>
 
             <div class="flex gap-6">
-                <a href="#" class="hover:underline hover:text-white">Impressum</a>
-                <a href="#" class="hover:underline hover:text-white">Datenschutz</a>
-                <a href="#" class="hover:underline hover:text-white">AGB</a>
+                <a href="#" class="hover:underline hover:text-gray-900 dark:hover:text-white">Impressum</a>
+                <a href="#" class="hover:underline hover:text-gray-900 dark:hover:text-white">Datenschutz</a>
+                <a href="#" class="hover:underline hover:text-gray-900 dark:hover:text-white">AGB</a>
             </div>
         </div>
     </footer>
