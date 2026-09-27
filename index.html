@@ -6,7 +6,7 @@
     <title>Ammara Bau - Premium Renovierung & Bodenlegung</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Alpine.js for interactive state switching & calculator -->
+    <!-- Alpine.js for interactive state switching -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Font Awesome for clean handcraft icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,13 +20,6 @@
         .theme-transition {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        /* Style for the range slider to match the copper branding */
-        input[type="range"]::-webkit-slider-thumb {
-            background: #e07a5f;
-            border-radius: 9999px;
-            width: 18px;
-            height: 18px;
-        }
     </style>
     <script>
         tailwind.config = {
@@ -34,10 +27,10 @@
                 extend: {
                     colors: {
                         ammara: {
-                            slate: '#5a5766', // Original background from logo
+                            slate: '#5a5766', 
                             dark: '#413e4b',
                             light: '#7b7887',
-                            copper: '#e07a5f', // Deep rich copper accent
+                            copper: '#e07a5f', 
                             copperHover: '#c85a3d',
                         }
                     },
@@ -51,9 +44,6 @@
     </script>
 </head>
 <body x-data="{ 
-    area: 50, 
-    service: 'boden', 
-    quality: 'premium',
     contactName: '',
     contactEmail: '',
     contactPhone: '',
@@ -61,48 +51,6 @@
     contactSubmitted: false,
     contactSending: false,
     
-    // =========================================================================
-    // RECHNER-WERTE ANPASSEN / ADJUST CALCULATOR VALUES HERE
-    // =========================================================================
-    // Sie können die Quadratmeterpreise (EUR pro m²) für jedes Gewerk unten ändern.
-    // Die Berechnung passt sich automatisch an, wenn Sie diese Zahlen anpassen.
-    // =========================================================================
-    calculateEstimate() {
-        // 1. BODENLEGUNG (Preise pro m²)
-        const bodenPreise = {
-            standard: 35,    // z.B. einfaches Laminat / Klickvinyl inkl. Verlegen
-            premium: 65,     // z.B. hochwertiges Designvinyl / Fertigparkett
-            exklusiv: 110    // z.B. Massivholzparkett, Fischgrätmuster, Premium-Trittschalldämmung
-        };
-
-        // 2. RENOVIERUNGSARBEITEN (Preise pro m²)
-        const renovierungPreise = {
-            standard: 45,    // z.B. einfaches Streichen und Spachteln (Q2)
-            premium: 85,     // z.B. feiner Putz, Vlies-Tapete, hochwertige Latexfarbe (Q3)
-            exklusiv: 145    // z.B. High-End Akustikpaneele, exklusive Wand-Designs (Q4)
-        };
-
-        // 3. KOMPLETTSANIERUNG (Preise pro m² für kombiniertes Projekt)
-        const komplettPreise = {
-            standard: 75,    // Basis Komplett-Sanierung (Boden + Wände grundlegend)
-            premium: 140,    // Premium Komplett-Sanierung (Boden + Wände gehoben)
-            exklusiv: 240    // Luxus Komplett-Sanierung (Boden + Wände exklusiv)
-        };
-
-        // Auswahl des richtigen Basispreises je nach ausgewähltem Service
-        let qmPreis = 0;
-        if (this.service === 'boden') {
-            qmPreis = bodenPreise[this.quality] || 0;
-        } else if (this.service === 'renovierung') {
-            qmPreis = renovierungPreise[this.quality] || 0;
-        } else if (this.service === 'komplett') {
-            qmPreis = komplettPreise[this.quality] || 0;
-        }
-        
-        // Gesamtsumme berechnen (Fläche * qmPreis)
-        return this.area * qmPreis;
-    },
-
     // =========================================================================
     // FORMULAR ABSENDEN PER AJAX (E-Mail an ammarabau94@gmail.com)
     // =========================================================================
@@ -136,18 +84,17 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
     <!-- ========================================== -->
     <!-- TOP BAR (KONTAKT & ERREICHBARKEIT)         -->
     <!-- ========================================== -->
-    <!-- TIPP: Ersetze die Telefonnummer +49 157 56184186 unten mit deiner echten Nummer -->
     <div class="bg-neutral-950 border-b border-neutral-900 py-2.5 px-6 lg:px-16 text-xs text-neutral-400">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
             <div class="flex flex-wrap justify-center sm:justify-start items-center gap-x-4 gap-y-1">
-                <a href="tel:+4917612345678" class="hover:text-ammara-copper transition-colors flex items-center gap-1.5">
+                <a href="tel:+4915756184186" class="hover:text-ammara-copper transition-colors flex items-center gap-1.5">
                     <i class="fa-solid fa-phone text-ammara-copper"></i> 
                     <span>Mobil: <strong class="font-mono text-gray-300 font-medium hover:underline">+49 157 56184186</strong></span>
                 </a>
                 <span class="hidden sm:inline text-neutral-800">|</span>
                 <span class="flex items-center gap-1.5">
                     <i class="fa-solid fa-clock text-ammara-copper"></i> 
-                    <span>Erreichbar: <strong class="text-gray-300 font-medium">Werktags 09:00 - 18:00 Uhr</strong></span>
+                    <span>Erreichbar: <strong class="text-gray-300 font-medium">Von 9:00 bis 18:00 Uhr</strong></span>
                 </span>
             </div>
             <div class="text-[11px] text-neutral-500 hidden md:block uppercase tracking-wider font-mono">
@@ -163,7 +110,6 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
             <!-- Brand Logo Frame -->
             <div class="flex items-center gap-4">
-                <!-- Premium Dark Badge to perfectly encapsulate and contrast the logo lines -->
                 <div class="p-1.5 rounded-lg bg-[#5a5766] border border-white/10 shadow-md transition-transform duration-300 hover:scale-105">
                     <img src="ammarabau_logo.png" alt="Ammara Bau Logo" class="h-16 w-auto object-contain block">
                 </div>
@@ -180,7 +126,6 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
             <!-- Navigation -->
             <nav class="flex items-center gap-6 text-sm font-medium text-gray-300">
                 <a href="#services" class="hover:text-ammara-copper transition">Leistungen</a>
-                <a href="#calculator" class="hover:text-ammara-copper transition font-semibold">Budgetrechner</a>
                 <a href="#about" class="hover:text-ammara-copper transition">Über Uns</a>
                 <a href="#contact" class="px-4 py-2 rounded text-xs uppercase tracking-widest font-semibold border border-ammara-copper text-ammara-copper hover:bg-ammara-copper hover:text-white transition-all duration-300">
                     Kontakt
@@ -193,7 +138,6 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
     <!-- HERO SECTION                               -->
     <!-- ========================================== -->
     <section class="relative overflow-hidden py-16 lg:py-28 px-6 lg:px-16 border-b border-neutral-800 bg-gradient-to-br from-neutral-950 via-[#1e1e24] to-neutral-950">
-        <!-- Architectural geometric background elements mimicking the logo lines -->
         <div class="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-end pr-20">
             <svg class="w-1/3 h-auto text-white" viewBox="0 0 100 100" fill="none" stroke="currentColor">
                 <rect x="10" y="10" width="80" height="80" stroke-width="2"/>
@@ -222,22 +166,15 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
                 </p>
 
                 <div class="flex flex-wrap gap-4 pt-4">
-                    <a href="#calculator" 
-                       class="px-8 py-4 rounded-lg font-bold text-sm tracking-wider uppercase transition-all duration-300 shadow-lg hover:shadow-xl bg-ammara-copper text-white hover:bg-ammara-copperHover hover:-translate-y-0.5">
-                        Angebotsrechner starten
-                    </a>
                     <a href="#services" 
-                       class="px-8 py-4 rounded-lg font-bold text-sm tracking-wider uppercase transition-all duration-300 border border-neutral-700 text-gray-300 hover:bg-neutral-900">
+                       class="px-8 py-4 rounded-lg font-bold text-sm tracking-wider uppercase transition-all duration-300 border border-neutral-700 bg-ammara-copper text-white hover:bg-ammara-copperHover shadow-lg hover:-translate-y-0.5">
                         Unsere Leistungen
                     </a>
                 </div>
             </div>
 
-            <!-- Dynamic visual showcase card mirroring the design aesthetic -->
             <div class="lg:col-span-5">
                 <div class="p-8 rounded-2xl relative shadow-2xl overflow-hidden border bg-neutral-900 border-neutral-800">
-                    
-                    <!-- Logo watermarked back of the showcase card -->
                     <div class="absolute -right-12 -bottom-12 opacity-5 pointer-events-none">
                         <img src="ammarabau_logo.png" alt="Branding" class="w-64 h-auto">
                     </div>
@@ -254,7 +191,6 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
                         <i class="fa-solid fa-square-poll-vertical text-3xl text-ammara-copper"></i>
                     </div>
 
-                    <!-- Highlight Bullet Points -->
                     <div class="space-y-4 relative z-10 text-white">
                         <div class="flex items-center gap-3">
                             <span class="p-1.5 rounded-md flex items-center justify-center text-xs bg-neutral-800 text-ammara-copper">
@@ -276,7 +212,6 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
                         </div>
                     </div>
 
-                    <!-- Mini CTA inside card -->
                     <div class="mt-8 pt-6 border-t border-neutral-800">
                         <div class="flex items-center justify-between text-xs text-white">
                             <span class="opacity-75">Unverbindliche Beratung:</span>
@@ -305,22 +240,22 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Service 1: Renovierungsarbeiten -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Service 1: Wand- & Flächenvorbereitung -->
                 <div class="p-8 rounded-xl border bg-neutral-950 border-neutral-800 hover:border-ammara-copper transition-all duration-300 hover:scale-[1.02]">
                     <div class="w-12 h-12 rounded-lg flex items-center justify-center text-xl mb-6 shadow-sm bg-neutral-800 text-ammara-copper">
                         <i class="fa-solid fa-hammer"></i>
                     </div>
                     <h4 class="text-xl font-bold mb-3 font-mono text-white">
-                        Renovierung
+                        Wand- & Flächenvorbereitung
                     </h4>
                     <p class="text-sm opacity-80 leading-relaxed mb-4">
-                        Trockenbau, professionelle Spachtel- und Malerarbeiten sowie Strukturveränderungen. Wir modernisieren Ihre Wände und Decken präzise und sauber.
+                        Professionelle Untergrundvorbereitung und Wandgestaltung. Wir sorgen für glatte Oberflächen und präzise Anstriche.
                     </p>
                     <ul class="text-xs space-y-2 opacity-90 text-neutral-300">
-                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Maler & Tapezierarbeiten</li>
-                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Trockenbauwände & Decken</li>
-                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Altbausanierung</li>
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Spachtelarbeiten & Ausgleich</li>
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Malerarbeiten (Painting)</li>
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Tapezierarbeiten</li>
                     </ul>
                 </div>
 
@@ -333,137 +268,13 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
                         Bodenlegung
                     </h4>
                     <p class="text-sm opacity-80 leading-relaxed mb-4">
-                        Fachgerechte Verlegung von anspruchsvollen Bodenbelägen. Wir sorgen für erstklassige Trittschalldämmung und perfekte Fugenausrichtung.
+                        Fachgerechte Verlegung von Premium-Bodenbelägen. Wir garantieren erstklassige Trittschalldämmung und perfekte Fugenausrichtung.
                     </p>
                     <ul class="text-xs space-y-2 opacity-90 text-neutral-300">
                         <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Echtholz-Parkett & Dielen</li>
-                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Hochwertiges Vinyl & Designböden</li>
-                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Laminat & Sockelleisten</li>
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Laminat, Vinyl, PVC-Folie & Designbelag</li>
+                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Fliesen & Keramik</li>
                     </ul>
-                </div>
-
-                <!-- Service 3: Komplettsanierung -->
-                <div class="p-8 rounded-xl border bg-neutral-950 border-neutral-800 hover:border-ammara-copper transition-all duration-300 hover:scale-[1.02]">
-                    <div class="w-12 h-12 rounded-lg flex items-center justify-center text-xl mb-6 shadow-sm bg-neutral-800 text-ammara-copper">
-                        <i class="fa-solid fa-house-chimney-crack"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3 font-mono text-white">
-                        Projektleitung
-                    </h4>
-                    <p class="text-sm opacity-80 leading-relaxed mb-4">
-                        Rundumsorglos-Sanierung Ihres Objektes. Wir koordinieren alle Gewerke und garantieren feste Absprachen, Termintreue und transparente Preise.
-                    </p>
-                    <ul class="text-xs space-y-2 opacity-90 text-neutral-300">
-                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Planung & Beratung vor Ort</li>
-                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Qualitätskontrollen & Abnahme</li>
-                        <li><i class="fa-solid fa-chevron-right text-[10px] mr-1 text-ammara-copper"></i> Komplettes Projektmanagement</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- BUDGET ESTIMATOR / CALCULATOR              -->
-    <!-- ========================================== -->
-    <section id="calculator" class="py-20 px-6 lg:px-16 border-t border-b border-neutral-800 bg-neutral-950">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center max-w-2xl mx-auto mb-12 space-y-4">
-                <span class="text-xs uppercase tracking-widest font-bold text-ammara-copper font-mono">
-                    Budgetplaner
-                </span>
-                <h3 class="text-3xl font-bold font-mono text-white">
-                    Sofort-Angebotsrechner
-                </h3>
-                <p class="text-sm opacity-80">
-                    Schätzen Sie unkompliziert die ungefähren Kosten für Ihr nächstes Projekt.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
-                <!-- Inputs -->
-                <div class="md:col-span-7 p-8 rounded-xl border flex flex-col justify-between bg-neutral-900 border-neutral-800">
-                    
-                    <div class="space-y-6">
-                        <!-- Option 1: Gewerk -->
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85 text-white font-mono">Leistungsbereich</label>
-                            <div class="grid grid-cols-3 gap-2">
-                                <button @click="service = 'boden'" 
-                                        class="py-2.5 px-3 text-xs font-semibold rounded-lg border transition-all duration-200"
-                                        :class="service === 'boden' ? 'bg-ammara-copper border-ammara-copper text-white shadow-sm' : 'border-neutral-700 hover:bg-neutral-800 text-neutral-300'">
-                                    Bodenlegung
-                                </button>
-                                <button @click="service = 'renovierung'" 
-                                        class="py-2.5 px-3 text-xs font-semibold rounded-lg border transition-all duration-200"
-                                        :class="service === 'renovierung' ? 'bg-ammara-copper border-ammara-copper text-white shadow-sm' : 'border-neutral-700 hover:bg-neutral-800 text-neutral-300'">
-                                    Renovierung
-                                </button>
-                                <button @click="service = 'komplett'" 
-                                        class="py-2.5 px-3 text-xs font-semibold rounded-lg border transition-all duration-200"
-                                        :class="service === 'komplett' ? 'bg-ammara-copper border-ammara-copper text-white shadow-sm' : 'border-neutral-700 hover:bg-neutral-800 text-neutral-300'">
-                                    Komplett
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Option 2: Area Slider -->
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <label class="block text-xs font-bold uppercase tracking-wider opacity-85 text-white font-mono">Fläche (qm)</label>
-                                <span class="text-sm font-bold text-white font-mono" x-text="area + ' m²'"></span>
-                            </div>
-                            <input type="range" min="10" max="250" step="5" x-model="area" 
-                                   class="w-full h-2 rounded-lg bg-neutral-800 appearance-none cursor-pointer accent-ammara-copper">
-                        </div>
-
-                        <!-- Option 3: Quality Segment -->
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85 text-white font-mono">Material- & Ausführungsklasse</label>
-                            <div class="grid grid-cols-3 gap-2">
-                                <button @click="quality = 'standard'" 
-                                        class="py-2.5 px-3 text-xs font-semibold rounded-lg border transition-all duration-200"
-                                        :class="quality === 'standard' ? 'bg-ammara-copper border-ammara-copper text-white shadow-sm' : 'border-neutral-700 hover:bg-neutral-800 text-neutral-300'">
-                                    Basis
-                                </button>
-                                <button @click="quality = 'premium'" 
-                                        class="py-2.5 px-3 text-xs font-semibold rounded-lg border transition-all duration-200"
-                                        :class="quality === 'premium' ? 'bg-ammara-copper border-ammara-copper text-white shadow-sm' : 'border-neutral-700 hover:bg-neutral-800 text-neutral-300'">
-                                    Premium
-                                </button>
-                                <button @click="quality = 'exklusiv'" 
-                                        class="py-2.5 px-3 text-xs font-semibold rounded-lg border transition-all duration-200"
-                                        :class="quality === 'exklusiv' ? 'bg-ammara-copper border-ammara-copper text-white shadow-sm' : 'border-neutral-700 hover:bg-neutral-800 text-neutral-300'">
-                                    Exklusiv
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <p class="text-xs opacity-50 italic mt-6 text-neutral-400">
-                        *Dies ist eine unverbindliche Richtwertkalkulation inkl. durchschnittlicher Material- und Einbaukosten.
-                    </p>
-                </div>
-
-                <!-- Display Estimate Result -->
-                <div class="md:col-span-5 p-8 rounded-xl border flex flex-col justify-between text-center relative overflow-hidden bg-neutral-900 border-neutral-800 text-white">
-                    
-                    <div class="space-y-4 my-auto relative z-10">
-                        <span class="text-xs uppercase tracking-widest font-semibold opacity-75 font-mono">Geschätztes Budget</span>
-                        <div class="text-5xl font-extrabold tracking-tight text-ammara-copper font-mono">
-                            ca. <span x-text="calculateEstimate().toLocaleString('de-DE')"></span> €
-                        </div>
-                        <p class="text-xs px-4 opacity-75">
-                            Basierend auf <strong x-text="area" class="text-ammara-copper"></strong> m² mit <strong x-text="quality.toUpperCase()" class="text-ammara-copper"></strong> Ausführung.
-                        </p>
-                    </div>
-
-                    <div class="pt-6 border-t mt-6 border-neutral-800">
-                        <a href="#contact" 
-                           class="block w-full py-3.5 rounded-lg font-bold text-xs uppercase tracking-widest transition-all duration-300 hover:scale-[1.02] shadow-sm bg-ammara-copper text-white hover:bg-ammara-copperHover">
-                            Angebot anfordern
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -472,18 +283,14 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
     <!-- ========================================== -->
     <!-- ABOUT SECTION                              -->
     <!-- ========================================== -->
-    <section id="about" class="py-20 px-6 lg:px-16 bg-neutral-900 text-gray-100">
+    <section id="about" class="py-20 px-6 lg:px-16 border-t border-neutral-800 bg-neutral-900 text-gray-100">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            <!-- Logo-inspired Brand Frame Graphic -->
             <div class="lg:col-span-5 flex justify-center">
                 <div class="relative p-12 max-w-sm rounded-3xl bg-neutral-950 border border-neutral-800 shadow-xl w-full">
-                    
-                    <!-- Top accent box mirroring logo layout -->
                     <div class="absolute inset-4 border rounded-2xl pointer-events-none opacity-20 border-ammara-copper"></div>
 
                     <div class="text-center relative z-10 space-y-6">
-                        <!-- Standardized and corrected logo badge -->
                         <div class="bg-[#5a5766] p-2 rounded-lg inline-block shadow-md">
                             <img src="ammarabau_logo.png" alt="Ammara Bau Logo Graphic" class="mx-auto w-32 h-auto object-contain">
                         </div>
@@ -495,7 +302,6 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
                 </div>
             </div>
 
-            <!-- Copy -->
             <div class="lg:col-span-7 space-y-6">
                 <span class="text-xs uppercase tracking-widest font-bold text-ammara-copper font-mono">
                     Unsere Philosophie
@@ -537,29 +343,26 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
                 </h3>
             </div>
 
-            <!-- Prominent, large Phone Contact Card -->
             <div class="bg-neutral-900 border border-neutral-800 p-8 md:p-10 rounded-2xl text-center mb-10 max-w-2xl mx-auto shadow-xl hover:border-ammara-copper transition duration-300 group">
                 <div class="w-14 h-14 rounded-full bg-ammara-copper/10 text-ammara-copper flex items-center justify-center mx-auto mb-4 text-xl group-hover:scale-110 transition duration-300">
                     <i class="fa-solid fa-phone"></i>
                 </div>
                 <p class="text-sm md:text-base uppercase tracking-widest text-neutral-300 font-mono mb-2 font-semibold">Rufen Sie uns direkt an</p>
-                <a href="tel:+4917612345678" class="block text-3xl md:text-5xl font-extrabold text-white font-mono tracking-wide hover:text-ammara-copper hover:underline transition-colors duration-200">
+                <a href="tel:+4915756184186" class="block text-3xl md:text-5xl font-extrabold text-white font-mono tracking-wide hover:text-ammara-copper hover:underline transition-colors duration-200">
                     +49 157 56184186
                 </a>
                 <p class="text-sm md:text-base text-neutral-300 mt-4 font-medium flex items-center justify-center gap-2">
                     <i class="fa-solid fa-clock text-ammara-copper text-lg"></i> 
-                    <span>Werktags erreichbar von <strong class="text-white hover:text-ammara-copper transition-colors">09:00 - 18:00 Uhr</strong></span>
+                    <span>Werktags erreichbar: <strong class="text-white hover:text-ammara-copper transition-colors">Von 9:00 bis 18:00 Uhr</strong></span>
                 </p>
             </div>
 
-            <!-- Stylized Divider "OR FILL FORM" -->
             <div class="flex items-center justify-center gap-4 my-10 max-w-xl mx-auto">
                 <div class="h-[1px] bg-neutral-800 flex-grow"></div>
                 <span class="text-xs uppercase tracking-widest text-neutral-500 font-mono font-bold">ODER</span>
                 <div class="h-[1px] bg-neutral-800 flex-grow"></div>
             </div>
 
-            <!-- Form Introduction Header -->
             <div class="text-center mb-8">
                 <h4 class="text-xl font-bold text-white font-mono">Füllen Sie unser Kontaktformular aus</h4>
                 <p class="text-sm text-neutral-400 mt-2">Wir melden uns innerhalb von 24 Stunden mit einem unverbindlichen Angebot bei Ihnen.</p>
@@ -567,7 +370,6 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
 
             <div class="p-8 rounded-xl border relative bg-neutral-900 border-neutral-800">
                 
-                <!-- Submission Message Success state -->
                 <div x-show="contactSubmitted" class="text-center py-12 space-y-4">
                     <div class="w-16 h-16 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded-full flex items-center justify-center mx-auto text-2xl">
                         <i class="fa-solid fa-check"></i>
@@ -577,17 +379,10 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
                     <button @click="contactSubmitted = false" class="text-xs font-bold underline uppercase tracking-widest text-ammara-copper hover:text-white mt-4">Neue Anfrage senden</button>
                 </div>
 
-                <!-- Actual Form Fields -->
                 <form x-show="!contactSubmitted" @submit.prevent="submitForm" class="space-y-6">
                     
-                    <!-- Hidden Form Configuration Fields for FormSubmit -->
                     <input type="hidden" name="_subject" value="Neue Projektanfrage von Ammara Bau!">
                     <input type="hidden" name="_template" value="table">
-                    <!-- Automatically attach calculator values to the email -->
-                    <input type="hidden" name="Gewaehlter_Service" :value="service">
-                    <input type="hidden" name="Gewuenschte_Flache_qm" :value="area">
-                    <input type="hidden" name="Ausfuehrungs_Qualitaet" :value="quality">
-                    <input type="hidden" name="Geschaetztes_Budget" :value="calculateEstimate() + ' EUR'">
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
@@ -602,7 +397,6 @@ class="bg-[#121214] text-gray-100 font-sans antialiased theme-transition">
                         </div>
                     </div>
 
-                    <!-- Row 2: Phone and Availability hours -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-85 text-white font-mono">Telefonnummer</label>
